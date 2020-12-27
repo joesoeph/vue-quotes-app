@@ -14,12 +14,7 @@
         </div>
         <div class="card-footer">
           <router-link :to="'/edit/' + data.id" class="btn btn-sm rounded-pill btn-warning mx-1">Edit</router-link>
-          <!-- <router-link to="/delete" class="btn btn-sm rounded-pill btn-danger mx-1">Delete</router-link> -->
-          <button v-confirm="{
-            loader: true,
-            ok: dialog => deleteCallback(dialog, data.id),
-            cancel: cancelCallback,
-            message: 'Sure to procced this?'}" type="button" class="btn btn-sm rounded-pill btn-danger mx-1">Delete</button>
+          <QuoteDelete :data-id="data.id" :reload="retrieveQuotes" />
         </div>
       </div>
     </div>
@@ -32,22 +27,23 @@
   </div>
 </template>
 <script>
-import Vue from 'vue'
-import VuejsDialog from 'vuejs-dialog'
-import 'vuejs-dialog/dist/vuejs-dialog.min.css'
-
-Vue.use(VuejsDialog)
+import QuoteDelete from '../components/QuoteDelete'
 
 const domain = 'https://5fe374928bf8af001766e6a1.mockapi.io/api/v1'
 const api = `${domain}/quotes`
 export default {
-  name: 'home',
+  components: {
+    QuoteDelete
+  },
+  name: 'Home',
   data () {
     return {
       quotes: [],
       page: 1,
       limit: 10,
-      isLoadmore: true
+      isLoadmore: true,
+      headingTitle: 'Quote App',
+      fontSize: 1
     }
   },
   methods: {

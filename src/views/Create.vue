@@ -26,7 +26,7 @@
 const domain = 'https://5fe374928bf8af001766e6a1.mockapi.io/api/v1'
 const api = `${domain}/quotes`
 export default {
-  name: 'create',
+  name: 'Create',
   data () {
     return {
       quotes:
